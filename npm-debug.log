@@ -1,0 +1,58 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'annotator@1.2.10' ]
+2 info using npm@2.5.1
+3 info using node@v0.12.0
+4 warn package.json @ No repository field.
+5 silly cache add args [ 'annotator@1.2.10', null ]
+6 verbose cache add spec annotator@1.2.10
+7 silly cache add parsed spec { raw: 'annotator@1.2.10',
+7 silly cache add   scope: null,
+7 silly cache add   name: 'annotator',
+7 silly cache add   rawSpec: '1.2.10',
+7 silly cache add   spec: '1.2.10',
+7 silly cache add   type: 'version' }
+8 verbose addNamed annotator@1.2.10
+9 silly addNamed semver.valid 1.2.10
+10 silly addNamed semver.validRange 1.2.10
+11 silly mapToRegistry name annotator
+12 silly mapToRegistry using default registry
+13 silly mapToRegistry registry https://registry.npmjs.org/
+14 silly mapToRegistry uri https://registry.npmjs.org/annotator
+15 verbose addNameVersion registry:https://registry.npmjs.org/annotator not in flight; fetching
+16 verbose request uri https://registry.npmjs.org/annotator
+17 verbose request no auth needed
+18 info attempt registry request try #1 at 5:08:12 PM
+19 verbose request id ffd029e84283c98b
+20 verbose etag "A0PNEIJIHR7WICTOTYJBICM7V"
+21 http request GET https://registry.npmjs.org/annotator
+22 http 304 https://registry.npmjs.org/annotator
+23 silly get cb [ 304,
+23 silly get   { date: 'Fri, 24 Jul 2015 16:08:13 GMT',
+23 silly get     via: '1.1 varnish',
+23 silly get     'cache-control': 'max-age=60',
+23 silly get     etag: '"A0PNEIJIHR7WICTOTYJBICM7V"',
+23 silly get     age: '0',
+23 silly get     connection: 'keep-alive',
+23 silly get     'x-served-by': 'cache-lcy1126-LCY',
+23 silly get     'x-cache': 'MISS',
+23 silly get     'x-cache-hits': '0',
+23 silly get     'x-timer': 'S1437754093.598875,VS0,VE809',
+23 silly get     vary: 'Accept' } ]
+24 verbose etag https://registry.npmjs.org/annotator from cache
+25 verbose get saving annotator to /Users/dan/.npm/registry.npmjs.org/annotator/.cache.json
+26 verbose stack Error: version not found: annotator@1.2.10
+26 verbose stack     at setData (/usr/local/lib/node_modules/npm/lib/cache/add-named.js:122:12)
+26 verbose stack     at RES (/usr/local/lib/node_modules/npm/node_modules/inflight/inflight.js:23:14)
+26 verbose stack     at f (/usr/local/lib/node_modules/npm/node_modules/once/once.js:17:25)
+26 verbose stack     at saved (/usr/local/lib/node_modules/npm/lib/cache/caching-client.js:173:7)
+26 verbose stack     at FSReqWrap.oncomplete (fs.js:99:15)
+27 verbose statusCode 404
+28 verbose cwd /Users/dan/dev/jspm-react
+29 error Darwin 14.1.0
+30 error argv "node" "/usr/local/bin/npm" "install" "annotator@1.2.10"
+31 error node v0.12.0
+32 error npm  v2.5.1
+33 error version not found: annotator@1.2.10
+34 error If you need help, you may report this error at:
+34 error     <http://github.com/npm/npm/issues>
+35 verbose exit [ 1, true ]
