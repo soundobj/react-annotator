@@ -89,6 +89,14 @@ import AnnotationActions from './AnnotationActions';
           //  this.annotator.viewer.load = this.load;
             //
 
+            var superUpdateAnnotation = this.annotator.updateAnnotation;
+            this.annotator.updateAnnotation = function(annotation,element) {
+                console.log('using widget update Annotation');
+                this.annotator.element = element;
+                superUpdateAnnotation(annotation);
+
+            }
+
             if (!Annotator.supported()) {
                 return;
             }

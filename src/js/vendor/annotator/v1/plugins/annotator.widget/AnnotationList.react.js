@@ -24,11 +24,13 @@ var AnnotationList = React.createClass({
     },
 
     render: function() {
-        console.log('Store.state',this.state);
-        var annotations = this.state.annotations.map(function (annotation) {
+        console.log('this state',this.state.annotations);
+        var single = [this.state.annotations[0]];
+        //this.state.annotations
+        var annotations = single.map(function (annotation) {
             console.log('annoationList render',annotation);
             return (
-                <AnnotationItem data={annotation} />
+                <AnnotationItem data={annotation} key={annotation.id} />
             );
         });
 

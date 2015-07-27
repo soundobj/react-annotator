@@ -11,7 +11,7 @@ class AnnotationsStore {
         this.annotations = [];
     }
 
-    loadAnnotations(annotations){
+    loadAnnotations({annotations}){
         console.log('annotationsStore loadAnnotations',annotations);
         this.annotations = annotations;
 
