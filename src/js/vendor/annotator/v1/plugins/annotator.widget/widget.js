@@ -26,205 +26,29 @@ import AnnotationActions from './AnnotationActions';
             return ("" + Math.random() + new Date().getTime()).slice(2);
         };
 
+        // another way of listening to events is
+        //this.subscribe('annotationsLoaded', function() {});
         Widget.prototype.events = {
             "annotationsLoaded": "_annotationsLoaded"
-            //,
-            //"annotationUpdated": "_onAnnotationUpdated",
-            //"annotationDeleted": "_onAnnotationDeleted"
         };
 
-        //Widget.prototype.options = {
-        //    getUniqueKey: function(annotation) {
-        //        if (!annotation.id) {
-        //            annotation.id = Widget.uuid();
-        //        }
-        //        return annotation.id;
-        //    },
-        //    shouldLoadAnnotation: function(annotation) {
-        //        return true;
-        //    }
-        //};
-
         function Widget() {
-            //this._onOffline = bind(this._onOffline, this);
-            //this._onOnline = bind(this._onOnline, this);
-            //var event, handler, handlers;
             Widget.__super__.constructor.apply(this, arguments);
-
-
-            //this.store = new Offline.Store();
-            //this.cache = {};
-            //handlers = {
-            //    online: "online",
-            //    offline: "offline",
-            //    beforeAnnotationLoaded: "setAnnotationData",
-            //    beforeAnnotationCreated: "setAnnotationData"
-            //};
-            //for (event in handlers) {
-            //    if (!hasProp.call(handlers, event)) continue;
-            //    handler = handlers[event];
-            //    if (typeof this.options[handler] === "function") {
-            //        this.on(event, jQuery.proxy(this.options, handler));
-            //    }
-            //}
-
-
         }
 
+        Widget.annotator = undefined;
+
         Widget.prototype.pluginInit = function() {
-
-            //this.subscribe('annotationsLoaded', function(annotations){
-            //    console.log('got stuff',annotations);
-            //});
-
-            //
-            console.log('overriding parent behaviour');
             var superOnHighlightMouseover = this.annotator.onHighlightMouseover;
             this.annotator.onHighlightMouseover = function(event) {
                 superOnHighlightMouseover(event);
-                //console.log('Now I do what I want');
-            }
-
-            console.log('annotator',this.annotator);
-          //  this.annotator.viewer.load = this.load;
-            //
-
-            var superUpdateAnnotation = this.annotator.updateAnnotation;
-            this.annotator.updateAnnotation = function(annotation,element) {
-                console.log('using widget update Annotation');
-                this.annotator.element = element;
-                superUpdateAnnotation(annotation);
-
+                console.log('widget superOnHighlightMouseover overriding parent behaviour');
             }
 
             if (!Annotator.supported()) {
                 return;
             }
-            //this.loadAnnotationsFromStore();
-            //if (this.isOnline()) {
-            //    this.online();
-            //} else {
-            //    this.offline();
-            //}
-            //return jQuery(window).bind({
-            //    online: this._onOnline,
-            //    offline: this._onOffline
-            //});
         };
-
-        //Offline.prototype.annotations = function() {
-        //    return this.cache;
-        //};
-        //
-        //Offline.prototype.online = function() {
-        //    this.publish("online", [this]);
-        //    return this;
-        //};
-        //
-        //Offline.prototype.offline = function() {
-        //    this.publish("offline", [this]);
-        //    return this;
-        //};
-        //
-        //Offline.prototype.isOnline = function() {
-        //    return window.navigator.onLine;
-        //};
-        //
-        //Offline.prototype.loadAnnotationsFromStore = function() {
-        //    var annotation, annotations, current, i, len;
-        //    current = [];
-        //    annotations = this.store.all(Offline.ANNOTATION_PREFIX);
-        //    for (i = 0, len = annotations.length; i < len; i++) {
-        //        annotation = annotations[i];
-        //        if (!(this.options.shouldLoadAnnotation(annotation))) {
-        //            continue;
-        //        }
-        //        this.publish("beforeAnnotationLoaded", [annotation, this]);
-        //        this.publish("annotationLoaded", [annotation, this]);
-        //        this.cache[this.keyForAnnotation(annotation)] = annotation;
-        //        current.push(annotation);
-        //    }
-        //    if (current.length) {
-        //        this.annotator.loadAnnotations(current);
-        //    }
-        //    return this;
-        //};
-        //
-        //Offline.prototype.addAnnotation = function(annotation, options) {
-        //    var isLoaded;
-        //    if (options == null) {
-        //        options = {};
-        //    }
-        //    isLoaded = this.cache[this.options.getUniqueKey(annotation)];
-        //    if (!isLoaded && this.options.shouldLoadAnnotation(annotation)) {
-        //        this.annotator.setupAnnotation(annotation, options.silent);
-        //    } else {
-        //        this.updateStoredAnnotation(annotation);
-        //    }
-        //    return this;
-        //};
-        //
-        //Offline.prototype.removeAnnotation = function(annotation) {
-        //    if (this.options.shouldLoadAnnotation(annotation)) {
-        //        this.annotator.deleteAnnotation(annotation);
-        //    } else {
-        //        this.removeStoredAnnotation(annotation);
-        //    }
-        //    return this;
-        //};
-        //
-        //Offline.prototype.updateStoredAnnotation = function(annotation) {
-        //    var id, key, local, storable;
-        //    id = this.keyForAnnotation(annotation);
-        //    key = this.keyForStore(annotation);
-        //    local = this.cache[id];
-        //    if (local) {
-        //        jQuery.extend(local, annotation);
-        //    } else {
-        //        local = this.cache[id] = annotation;
-        //    }
-        //    storable = jQuery.extend({}, local);
-        //    delete storable.highlights;
-        //    this.store.set(key, storable);
-        //    return this;
-        //};
-        //
-        //Offline.prototype.removeStoredAnnotation = function(annotation) {
-        //    var id, key;
-        //    id = this.keyForAnnotation(annotation);
-        //    key = this.keyForStore(annotation);
-        //    this.store.remove(key);
-        //    delete this.cache[id];
-        //    return this;
-        //};
-        //
-        //Offline.prototype.keyForAnnotation = function(annotation) {
-        //    return this.options.getUniqueKey.call(this, annotation, this);
-        //};
-        //
-        //Offline.prototype.keyForStore = function(annotation) {
-        //    return Offline.ANNOTATION_PREFIX + this.keyForAnnotation(annotation);
-        //};
-        //
-        //Offline.prototype._onOnline = function(event) {
-        //    return this.online();
-        //};
-        //
-        //Offline.prototype._onOffline = function(event) {
-        //    return this.offline();
-        //};
-        //
-        //Offline.prototype._onAnnotationCreated = function(annotation) {
-        //    return this.updateStoredAnnotation(annotation);
-        //};
-        //
-        //Offline.prototype._onAnnotationUpdated = function(annotation) {
-        //    return this.updateStoredAnnotation(annotation);
-        //};
-        //
-        //Offline.prototype._onAnnotationDeleted = function(annotation) {
-        //    return this.removeStoredAnnotation(annotation);
-        //};
 
         Widget.prototype._annotationsLoaded = function(annotations) {
             //return this.offline();
@@ -235,56 +59,6 @@ import AnnotationActions from './AnnotationActions';
                 document.getElementById('annotations')
             );
 
-
-        };
-
-        Widget.prototype.load = function(annotations) {
-            console.log('override load annotation');
-            var annotation, controller, controls, del, edit, element, field, item, link, links, list, _k, _l, _len2, _len3, _ref2, _ref3;
-            this.annotations = annotations || [];
-            //list = this.element.find("ul:first").empty();
-            list = $("#annotations");
-
-
-            _ref2 = this.annotations;
-            for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
-                annotation = _ref2[_k];
-                item = $(this.item).clone().appendTo(list).data("annotation", annotation);
-                controls = item.find(".annotator-controls");
-                link = controls.find(".annotator-link");
-                edit = controls.find(".annotator-edit");
-                del = controls.find(".annotator-delete");
-                //links = new LinkParser(annotation.links || []).get("alternate", {type: "text/html"});
-                //if (links.length === 0 || links[0].href == null) {
-                //    link.remove()
-                //} else {
-                //    link.attr("href", links[0].href)
-                //}
-                if (this.options.readOnly) {
-                    edit.remove();
-                    del.remove()
-                } else {
-                    controller = {
-                        showEdit: function () {
-                            return edit.removeAttr("disabled")
-                        }, hideEdit: function () {
-                            return edit.attr("disabled", "disabled")
-                        }, showDelete: function () {
-                            return del.removeAttr("disabled")
-                        }, hideDelete: function () {
-                            return del.attr("disabled", "disabled")
-                        }
-                    }
-                }
-                _ref3 = this.fields;
-                for (_l = 0, _len3 = _ref3.length; _l < _len3; _l++) {
-                    field = _ref3[_l];
-                    element = $(field.element).clone().appendTo(item)[0];
-                    field.load(element, annotation, controller)
-                }
-            }
-            this.publish("load", [this.annotations]);
-            return this.show()
         };
 
         return Widget;

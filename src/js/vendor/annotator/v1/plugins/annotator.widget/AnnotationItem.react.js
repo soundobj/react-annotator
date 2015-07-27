@@ -1,32 +1,23 @@
 import React from 'react';
 import $ from 'jquery';
-import annotator from '../../pkg/annotator.min';
 
 var AnnotationItem = React.createClass({
 
     saveItem: function () {
-        let value = this.refs.annotation.getDOMNode().value;
-        this.props.data.text = value;
-
-        window.Annotator.updateAnnotation(
-            this.props.data,
-            this.getAnnotationDOMElement()
-        );
-        console.log('saving anotation',annotator);
+        console.log('updating annotation');
+        this.props.data.text = this.refs.annotation.getDOMNode().value;
+        $('#airlock').annotator().annotator('updateAnnotation', this.props.data);
     },
 
     deleteItem: function () {
         console.log('deleting annotation');
+        $('#airlock').annotator().annotator('deleteAnnotation', this.props.data);
     },
 
     origHighlightClassName: undefined,
-    AnnotationSelector: 'span[data-annotation-id="XXX"]',
-    selectorPlaceHolder: 'XXX',
 
     getAnnotationDOMElement: function() {
-        return $(this.AnnotationSelector.replace(
-            this.selectorPlaceHolder,
-            this.props.data.id));
+        return $('span[data-annotation-id="@"]'.replace('@', this.props.data.id));
     },
 
     highlightAnnotation: function () {
@@ -40,7 +31,6 @@ var AnnotationItem = React.createClass({
         let selectedAnnotation = this.getAnnotationDOMElement();
         $(selectedAnnotation).attr('class',this.origHighlightClassName);
     },
-
 
     render: function() {
         console.log('id',this.props.data.id);
@@ -58,8 +48,6 @@ var AnnotationItem = React.createClass({
                           rows="4"
                           cols="30"
                           name="annotation"
-                          //value={this.props.data.text}
-                          //onChange={this.saveItem}
                           onMouseEnter={this.highlightAnnotation}
                           onMouseLeave={this.resetHighlightAnnotation}
                     >
