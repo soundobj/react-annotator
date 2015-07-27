@@ -29,7 +29,8 @@ import AnnotationActions from './AnnotationActions';
         // another way of listening to events is
         //this.subscribe('annotationsLoaded', function() {});
         Widget.prototype.events = {
-            "annotationsLoaded": "_annotationsLoaded"
+            "annotationsLoaded": "_annotationsLoaded",
+            "annotationDeleted": "_onAnnotationDeleted"
         };
 
         function Widget() {
@@ -59,6 +60,12 @@ import AnnotationActions from './AnnotationActions';
                 document.getElementById('annotations')
             );
 
+        };
+
+        Widget.prototype._onAnnotationDeleted = function(annotation) {
+            //return this.removeStoredAnnotation(annotation);
+            console.log('Widget deleting annotation');
+            AnnotationActions.deleteAnnotation(annotation);
         };
 
         return Widget;

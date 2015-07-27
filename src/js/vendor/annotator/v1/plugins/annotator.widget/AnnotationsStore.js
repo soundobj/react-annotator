@@ -17,6 +17,13 @@ class AnnotationsStore {
 
     }
 
+    deleteAnnotation({annotation}){
+        console.log('annotationsStore delete',annotations);
+        this.annotations = this.annotations.filter(function(el){
+            return el.id !== this.el.id;
+        },{el:annotation});
+        console.log('annotations after',this.annotations);
+    }
 }
 
 export default alt.createStore(AnnotationsStore,storeID);

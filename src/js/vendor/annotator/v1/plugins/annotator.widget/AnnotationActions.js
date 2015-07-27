@@ -7,6 +7,11 @@ class AnnotationActions {
         this.dispatch({annotations});
     }
 
+    deleteAnnotation(annotation){
+        console.log('Annotation Actions deleting annotation',annotation);
+        this.dispatch({annotation});
+    }
+
 }
 
 export default alt.createActions(AnnotationActions);
