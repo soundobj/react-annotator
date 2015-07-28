@@ -72,7 +72,7 @@ import AnnotationActions from './AnnotationActions';
             console.log('Widget annotationCreated');
             AnnotationActions.addAnnotation(annotation);
         };
-        
+
         //Widget.prototype._beforeAnnotationCreated = function(annotation) {
         //    console.log('Widget _beforeAnnotationCreated',annotation);
         //    //AnnotationActions.createAnnotation(annotation);
