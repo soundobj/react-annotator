@@ -29,7 +29,7 @@ var AnnotationList = React.createClass({
         return Array.prototype.slice.call(DOMAnnotations).map(function(element) {
             return annotations.filter(function(el) {
                 return el.id === element.getAttribute('data-annotation-id');
-            })[0]; // get the single element of the array
+            })[0]; // get the single element of the array returned by filter()
         });
     },
 
