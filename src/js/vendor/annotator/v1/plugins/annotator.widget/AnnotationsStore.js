@@ -24,6 +24,13 @@ class AnnotationsStore {
         },{el:annotation});
         console.log('annotations after',this.annotations);
     }
+
+    addAnnotation({annotation}){
+        console.log('annotationsStore add',annotation);
+        this.annotations.push(annotation);
+    }
+
+
 }
 
 export default alt.createStore(AnnotationsStore,storeID);

@@ -30,7 +30,9 @@ import AnnotationActions from './AnnotationActions';
         //this.subscribe('annotationsLoaded', function() {});
         Widget.prototype.events = {
             "annotationsLoaded": "_annotationsLoaded",
-            "annotationDeleted": "_onAnnotationDeleted"
+            "annotationDeleted": "_onAnnotationDeleted",
+         //   "beforeAnnotationCreated": "_beforeAnnotationCreated",
+            "annotationCreated" : "_annotationCreated",
         };
 
         function Widget() {
@@ -52,7 +54,6 @@ import AnnotationActions from './AnnotationActions';
         };
 
         Widget.prototype._annotationsLoaded = function(annotations) {
-            //return this.offline();
             console.log('annotations loaded widget',annotations);
             //AnnotationActions.loadAnnotations(annotations);
             React.render(
@@ -63,10 +64,21 @@ import AnnotationActions from './AnnotationActions';
         };
 
         Widget.prototype._onAnnotationDeleted = function(annotation) {
-            //return this.removeStoredAnnotation(annotation);
             console.log('Widget deleting annotation');
             AnnotationActions.deleteAnnotation(annotation);
         };
+
+        Widget.prototype._annotationCreated = function(annotation) {
+            console.log('Widget annotationCreated');
+            AnnotationActions.addAnnotation(annotation);
+        };
+        
+        //Widget.prototype._beforeAnnotationCreated = function(annotation) {
+        //    console.log('Widget _beforeAnnotationCreated',annotation);
+        //    //AnnotationActions.createAnnotation(annotation);
+        //};
+
+
 
         return Widget;
 

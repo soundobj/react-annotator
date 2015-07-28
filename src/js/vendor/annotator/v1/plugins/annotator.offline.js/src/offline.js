@@ -187,9 +187,9 @@
       return this.updateStoredAnnotation(annotation);
     };
 
-    Offline.prototype._onAnnotationDeleted = function(annotation) {
-      return this.removeStoredAnnotation(annotation);
-    };
+      Offline.prototype._onAnnotationDeleted = function(annotation) {
+        return this.removeStoredAnnotation(annotation);
+      };
 
     return Offline;
 
