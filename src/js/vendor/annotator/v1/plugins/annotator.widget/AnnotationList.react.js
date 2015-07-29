@@ -38,14 +38,12 @@ var AnnotationList = React.createClass({
 
         var sortedAnnotations = this.sortByAppereanceInDocument(this.state.annotations);
         var annotations = sortedAnnotations.map(function (annotation) {
-            //console.log('annoationList render',annotation);
             return (
                 <AnnotationItem data={annotation} key={annotation.id} />
             );
         });
 
         return (
-
             <div className="annotations">
                 {annotations}
             </div>

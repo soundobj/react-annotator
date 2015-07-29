@@ -45,6 +45,8 @@ import AnnotationActions from './AnnotationActions';
             var superOnHighlightMouseover = this.annotator.onHighlightMouseover;
             this.annotator.onHighlightMouseover = function(event) {
                 superOnHighlightMouseover(event);
+
+                //TODO: $("#6610190251376481438009425344").focus(); on the RHS annotation
                 console.log('widget superOnHighlightMouseover overriding parent behaviour');
             }
 
@@ -69,6 +71,9 @@ import AnnotationActions from './AnnotationActions';
         };
 
         Widget.prototype._annotationCreated = function(annotation) {
+            // bestow the new annotation with a unique id
+            annotation.id = this.annotator.plugins['Offline'].options.getUniqueKey(annotation);
+            annotation.highlights[0].setAttribute('data-annotation-id',annotation.id);
             console.log('Widget annotationCreated');
             AnnotationActions.addAnnotation(annotation);
         };

@@ -1,6 +1,9 @@
 body {
   background-size: contain; }
 
+#airlock {
+  max-width: 600px; }
+
 .highlightTextActive {
   background: rgba(0, 255, 23, 0.55); }
 

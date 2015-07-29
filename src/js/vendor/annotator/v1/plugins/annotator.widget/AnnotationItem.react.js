@@ -50,6 +50,7 @@ var AnnotationItem = React.createClass({
                           name="annotation"
                           onMouseEnter={this.highlightAnnotation}
                           onMouseLeave={this.resetHighlightAnnotation}
+                          id={this.props.data.id}
                     >
                     {this.props.data.text}
                 </textarea>
