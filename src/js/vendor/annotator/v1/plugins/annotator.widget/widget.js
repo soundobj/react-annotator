@@ -31,7 +31,6 @@ import AnnotationActions from './AnnotationActions';
         Widget.prototype.events = {
             "annotationsLoaded": "_annotationsLoaded",
             "annotationDeleted": "_onAnnotationDeleted",
-         //   "beforeAnnotationCreated": "_beforeAnnotationCreated",
             "annotationCreated" : "_annotationCreated",
         };
 
@@ -39,14 +38,14 @@ import AnnotationActions from './AnnotationActions';
             Widget.__super__.constructor.apply(this, arguments);
         }
 
-        Widget.annotator = undefined;
         Widget.mousedOveredAnnotation = undefined;
 
         Widget.prototype.pluginInit = function() {
             var superOnHighlightMouseover = this.annotator.onHighlightMouseover;
             this.annotator.onHighlightMouseover = function(event) {
                 superOnHighlightMouseover(event);
-                Widget.mousedOveredAnnotation = document.getElementById(event.target.getAttribute('data-annotation-id'));
+                Widget.mousedOveredAnnotation = document.getElementById(
+                    event.target.getAttribute('data-annotation-id'));
                 Widget.mousedOveredAnnotation.focus();
             }
 

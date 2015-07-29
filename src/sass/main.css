@@ -4,6 +4,13 @@ body {
 #airlock {
   max-width: 600px; }
 
+#annotations {
+  position: fixed;
+  top: 2%;
+  right: 2%;
+  overflow-y: scroll;
+  height: 100%; }
+
 .highlightTextActive {
   background: rgba(0, 255, 23, 0.55); }
 
