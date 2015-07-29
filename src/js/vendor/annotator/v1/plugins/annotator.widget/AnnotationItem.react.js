@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import scrollIntoView from '../../../../jquery/plugins/jquery.scrollintoview.min';
 
 var AnnotationItem = React.createClass({
 
@@ -15,27 +16,35 @@ var AnnotationItem = React.createClass({
     },
 
     origHighlightClassName: undefined,
+    annotationDOMElement: undefined,
 
     getAnnotationDOMElement: function() {
-        return $('span[data-annotation-id="@"]'.replace('@', this.props.data.id));
+        if(!this.annotationDOMElement) {
+            this.annotationDOMElement =
+                $('span[data-annotation-id="@"]'.replace('@', this.props.data.id));
+            return this.annotationDOMElement;
+        }
+        return this.annotationDOMElement;
     },
 
     highlightAnnotation: function () {
-        let selectedAnnotation = this.getAnnotationDOMElement();
-        this.origHighlightClassName = $(selectedAnnotation).attr('class');
-
-        $(selectedAnnotation).attr('class','highlightTextActive');
+        this.origHighlightClassName = this.getAnnotationDOMElement().attr('class');
+        this.getAnnotationDOMElement().attr('class','highlightTextActive');
     },
 
     resetHighlightAnnotation: function () {
-        let selectedAnnotation = this.getAnnotationDOMElement();
-        $(selectedAnnotation).attr('class',this.origHighlightClassName);
+        this.getAnnotationDOMElement().attr('class',this.origHighlightClassName);
+    },
+
+    scrollAnnotationIntoView: function () {
+        console.log('scrolling into view');
+        this.getAnnotationDOMElement().scrollintoview({duration: 1500});
     },
 
     render: function() {
         console.log('id',this.props.data.id);
         return (
-            <div className="annotation">
+            <div className="annotation" onClick={this.scrollAnnotationIntoView}>
                 <div className="actions">
                     <button ref="delete" onClick={this.deleteItem}>
                         Delete

@@ -2,7 +2,7 @@ body {
   background-size: contain; }
 
 #airlock {
-  max-width: 600px; }
+  max-width: 300px; }
 
 #annotations {
   position: fixed;

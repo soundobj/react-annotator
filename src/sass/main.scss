@@ -3,12 +3,11 @@ body {
 }
 
 #airlock {
-  max-width: 600px;
+  max-width: 300px;
 }
 
 #annotations {
   position: fixed; top: 2%; right: 2%;
-
   overflow-y: scroll;
   height: 100%;
 }
